@@ -1,6 +1,5 @@
-package io.github.abappi19.motivation.ui.theme
+package io.github.abappi19.motivation.core.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

@@ -1,7 +1,7 @@
-package io.github.abappi19.motivation.ui.components
+package io.github.abappi19.motivation.calendar.presentation.components
 
 import androidx.compose.runtime.Composable
-import io.github.abappi19.motivation.model.WidgetConfig
+import io.github.abappi19.motivation.core.domain.WidgetConfig
 
 @Composable
 fun DotGrid(config: WidgetConfig) {

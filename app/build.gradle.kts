@@ -2,16 +2,17 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
     namespace = "io.github.abappi19.motivation"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "io.github.abappi19.motivation"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -50,11 +51,14 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     
     // Glance for App Widgets
-    implementation(libs.androidx.glance.appwidget)
-    implementation(libs.androidx.glance.material3)
+    implementation("androidx.glance:glance-appwidget:1.1.1")
+    implementation("androidx.glance:glance-material3:1.1.1")
     
     // DataStore for persistence
-    implementation(libs.androidx.datastore.preferences)
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+
+    // Kotlin Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

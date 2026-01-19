@@ -6,5 +6,5 @@
     android:initialLayout="@layout/glance_default_layout"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
-    android:configure="io.github.abappi19.motivation.MainActivity">
+    android:configure="io.github.abappi19.motivation.app.MainActivity">
 </appwidget-provider>

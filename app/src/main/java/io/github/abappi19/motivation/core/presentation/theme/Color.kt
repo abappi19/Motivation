@@ -1,4 +1,4 @@
-package io.github.abappi19.motivation.ui.theme
+package io.github.abappi19.motivation.core.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

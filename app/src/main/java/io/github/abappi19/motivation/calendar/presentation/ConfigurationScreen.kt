@@ -1,4 +1,4 @@
-package io.github.abappi19.motivation.ui
+package io.github.abappi19.motivation.calendar.presentation
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -9,14 +9,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import io.github.abappi19.motivation.data.WidgetRepository
-import java.time.LocalDate
+import io.github.abappi19.motivation.calendar.data.repository.DefaultCalendarWidgetRepository
+import io.github.abappi19.motivation.core.presentation.components.DatePickerFieldToModal
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfigurationScreen(widgetId: Int) {
     val context = LocalContext.current
-    val repository = remember { WidgetRepository(context) }
+    val repository = remember { DefaultCalendarWidgetRepository(context) }
     val viewModel = remember { ConfigurationViewModel(repository, widgetId) }
     val uiState by viewModel.uiState.collectAsState()
 
@@ -30,24 +30,9 @@ fun ConfigurationScreen(widgetId: Int) {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text("Start Date: ${uiState.startDate}")
-            Button(onClick = { viewModel.updateStartDate(uiState.startDate.minusDays(1)) }) {
-                Text("Decrease Start Date")
-            }
-            Button(onClick = { viewModel.updateStartDate(uiState.startDate.plusDays(1)) }) {
-                Text("Increase Start Date")
-            }
+            DatePickerFieldToModal(
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text("End Date: ${uiState.endDate}")
-            Button(onClick = { viewModel.updateEndDate(uiState.endDate.minusDays(1)) }) {
-                Text("Decrease End Date")
-            }
-            Button(onClick = { viewModel.updateEndDate(uiState.endDate.plusDays(1)) }) {
-                Text("Increase End Date")
-            }
-
+            )
             Spacer(modifier = Modifier.weight(1f))
 
             Button(

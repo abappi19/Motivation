@@ -1,9 +1,12 @@
-package io.github.abappi19.motivation.widget
+package io.github.abappi19.motivation.calendar.widget
 
 import android.content.Context
+import android.content.res.Resources
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
+import androidx.glance.GlanceTheme
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
@@ -11,13 +14,12 @@ import androidx.glance.layout.*
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import io.github.abappi19.motivation.data.WidgetRepository
-import io.github.abappi19.motivation.model.WidgetConfig
+import io.github.abappi19.motivation.calendar.data.repository.DefaultCalendarWidgetRepository
 import kotlinx.coroutines.flow.first
 
 class MotivationWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val repository = WidgetRepository(context)
+        val repository = DefaultCalendarWidgetRepository(context)
         // For simplicity in MVP, we use a fixed ID or first config
         // In full implementation, map GlanceId to widgetId
         val config = repository.getWidgetConfig(0).first()
@@ -30,11 +32,11 @@ class MotivationWidget : GlanceAppWidget() {
             ) {
                 Text(
                     text = "Start: ${config.startDate}",
-                    style = TextStyle(color = ColorProvider(androidx.compose.ui.graphics.Color.Black))
+                    style = TextStyle(color = GlanceTheme.colors.primary)
                 )
                 Text(
                     text = "End: ${config.endDate}",
-                    style = TextStyle(color = ColorProvider(androidx.compose.ui.graphics.Color.Black))
+                    style = TextStyle(color = GlanceTheme.colors.primary)
                 )
             }
         }
