@@ -41,6 +41,12 @@ class ConfigurationViewModel(
 
     fun onAction(action: ConfigurationAction) {
         when (action) {
+            is ConfigurationAction.OnStartDateChange -> {
+                _uiState.update { it.copy(startDate = action.newDate) }
+            }
+            is ConfigurationAction.OnEndDateChange -> {
+                _uiState.update { it.copy(endDate = action.newDate) }
+            }
             is ConfigurationAction.OnConfigSave -> {
                 val newConfig  = CalendarWidgetConfig(
                     startDate = _uiState.value.startDate,

@@ -17,21 +17,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
-import java.text.SimpleDateFormat
+import java.time.Instant
 import java.time.LocalDate
-import java.util.Date
-import java.util.Locale
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 
 @Composable
-fun DatePickerFieldToModal(modifier: Modifier = Modifier, selectedDate: LocalDate, onDateSelected: (LocalDate) -> Unit) {
+fun DatePickerFieldToModal(
+    modifier: Modifier = Modifier,
+    selectedDate: LocalDate,
+    onDateSelected: (LocalDate) -> Unit,
+    title: String,
+    placeholder: String? = null
+) {
     var showModal by remember { mutableStateOf(false) }
 
     OutlinedTextField(
-        value = selectedDate.to,
+        value = selectedDate.format(DateTimeFormatter.ISO_DATE),
         onValueChange = { },
-        label = { Text("DOB") },
-        placeholder = { Text("MM/DD/YYYY") },
+        label = { Text(text = title) },
+        placeholder = { Text(text = placeholder ?: "MM/DD/YYYY") },
         trailingIcon = {
             Icon(Icons.Default.DateRange, contentDescription = "Select date")
         },
@@ -53,13 +59,18 @@ fun DatePickerFieldToModal(modifier: Modifier = Modifier, selectedDate: LocalDat
 
     if (showModal) {
         DatePickerModal(
-            onDateSelected = { selectedDate = it },
+            onDateSelected = { millis ->
+                millis?.let {
+                    onDateSelected(
+                        convertMillisToLocalDate(millis)
+                    )
+                }
+            },
             onDismiss = { showModal = false }
         )
     }
 }
 
-fun convertMillisToDate(millis: Long): String {
-    val formatter = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
-    return formatter.format(Date(millis))
+fun convertMillisToLocalDate(millis: Long): LocalDate {
+    return Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault()).toLocalDate()
 }
