@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
             AppWidgetManager.INVALID_APPWIDGET_ID
         ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
 
+        println("widgetId: $widgetId")
         setContent {
             MotivationTheme {
                 if (widgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {

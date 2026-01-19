@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import io.github.abappi19.motivation.calendar.data.repository.DefaultCalendarWidgetRepository
 import io.github.abappi19.motivation.core.presentation.components.DatePickerFieldToModal
-import kotlinx.coroutines.selects.select
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,15 +55,14 @@ fun ConfigurationScreen(widgetId: Int) {
 
                 Button(
                     onClick = {
-                        viewModel.saveConfig(context)
-                        val resultValue =
-                            Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
-                        (context as? Activity)?.setResult(Activity.RESULT_OK, resultValue)
-                        (context as? Activity)?.finish()
+                        viewModel.onAction(ConfigurationAction.OnConfigSave(context))
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Save and Add Widget")
+                    Text(when(uiState.savedConfig) {
+                        null -> "Add Widget"
+                        else -> "Update Widget"
+                    })
                 }
 
             }

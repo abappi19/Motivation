@@ -11,7 +11,7 @@ val Context.dataStore by preferencesDataStore(name = "widget_prefs")
 
  interface WidgetRepository <T: WidgetConfig>{
 
-    fun getWidgetConfig(widgetId: Int): Flow<T>
+    fun getWidgetConfig(widgetId: Int): Flow<T?>
 
     fun getPreferencesKey(name:String, widgetId:Int): Preferences.Key<String>{
         return stringPreferencesKey("widget_sp-$name-$widgetId")
