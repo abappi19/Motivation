@@ -14,11 +14,12 @@ class DefaultCalendarWidgetRepository(private val context: Context) : CalendarWi
     private val WIDGET_NAME = "calendarWidget";
 
     override fun getWidgetConfig(widgetId: Int): Flow<CalendarWidgetConfig?> {
+
         return context.dataStore.data.map { preferences ->
             val key = getPreferencesKey(WIDGET_NAME, widgetId)
             preferences[key]?.let { str ->
-                 Json.decodeFromString<CalendarWidgetConfig>(str)
-             }
+                Json.decodeFromString<CalendarWidgetConfig>(str)
+            }
         }
     }
 

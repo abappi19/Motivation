@@ -21,6 +21,7 @@ import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import io.github.abappi19.motivation.calendar.data.repository.DefaultCalendarWidgetRepository
 import io.github.abappi19.motivation.calendar.domain.CalendarWidgetConfig
+import io.github.abappi19.motivation.calendar.presentation.components.DotGrid
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.last
@@ -35,20 +36,8 @@ class MotivationWidget : GlanceAppWidget() {
         provideContent {
 
             val config = repository.getWidgetConfig(widgetId).collectAsState(CalendarWidgetConfig())
-
-            Column(
-                modifier = GlanceModifier.fillMaxSize().padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Start: ${config.value?.startDate}",
-                    style = TextStyle(color = GlanceTheme.colors.primary)
-                )
-                Text(
-                    text = "End: ${config.value?.endDate}",
-                    style = TextStyle(color = GlanceTheme.colors.primary)
-                )
+            GlanceTheme{
+                DotGrid(config.value)
             }
         }
     }

@@ -38,7 +38,7 @@ class ConfigurationViewModel(
                         todayConfig = config?.todayConfig ?: DotConfig(),
                         futureConfig = config?.futureConfig ?: DotConfig(),
                         backgroundColor = config?.backgroundColor ?: 0xffffff,
-                        dotSize = config?.dotSize ?: 4f,
+                        dotSize = config?.dotSize ?: 12f,
                         savedConfig = config
                     )
 
